@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Container, Modal } from 'semantic-ui-react';
-import copy from 'copy-to-clipboard'
 import './index.css';
 import '../Account/Account.css';
 import receive from '../../assets/receive.svg'
@@ -19,11 +18,12 @@ const ReceiveModal = ({address, open, close}: ReceiveModalProps) => {
 
   const copyAddress = () => {
     if(address) {
-      copy(address)
-      setAddressCopy(true);
-      setTimeout(() => {
-        setAddressCopy(false)
-      },1500)
+      navigator.clipboard.writeText(address).then(function() {
+        setAddressCopy(true);
+        setTimeout(() => {
+          setAddressCopy(false)
+        },1500)
+      });
     }
   }
 
